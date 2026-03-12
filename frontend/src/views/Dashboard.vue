@@ -1,154 +1,112 @@
 <template>
-  <div class="dashboard-container">
-    <el-container>
-      <el-header>
-        <div class="header-content">
-          <h2>减重管理系统</h2>
-          <div class="user-info">
-            <span>欢迎，{{ userStore.user?.nickname || userStore.user?.username }}</span>
-            <el-button @click="handleLogout" type="danger" size="small">退出</el-button>
-          </div>
-        </div>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <el-menu :default-active="activeMenu" router>
-            <el-menu-item index="/dashboard">
-              <el-icon><DataLine /></el-icon>
-              <span>仪表盘</span>
-            </el-menu-item>
-            <el-menu-item index="/weight">
+  <div class="dashboard-content">
+    <el-row :gutter="20">
+      <el-col :span="6">
+        <el-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon weight">
               <el-icon><Scale /></el-icon>
-              <span>体重管理</span>
-            </el-menu-item>
-            <el-menu-item index="/diet">
-              <el-icon><Food /></el-icon>
-              <span>饮食管理</span>
-            </el-menu-item>
-            <el-menu-item index="/exercise">
-              <el-icon><Bicycle /></el-icon>
-              <span>运动管理</span>
-            </el-menu-item>
-            <el-menu-item index="/profile">
-              <el-icon><User /></el-icon>
-              <span>个人中心</span>
-            </el-menu-item>
-          </el-menu>
-        </el-aside>
-        <el-main>
-          <div class="dashboard-content">
-            <el-row :gutter="20">
-              <el-col :span="6">
-                <el-card class="stat-card">
-                  <div class="stat-content">
-                    <div class="stat-icon weight">
-                      <el-icon><Scale /></el-icon>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-label">当前体重</div>
-                      <div class="stat-value">{{ latestWeight?.weight || '--' }} kg</div>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-              <el-col :span="6">
-                <el-card class="stat-card">
-                  <div class="stat-content">
-                    <div class="stat-icon bmi">
-                      <el-icon><TrendCharts /></el-icon>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-label">BMI</div>
-                      <div class="stat-value">{{ latestWeight?.bmi || '--' }}</div>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-              <el-col :span="6">
-                <el-card class="stat-card">
-                  <div class="stat-content">
-                    <div class="stat-icon target">
-                      <el-icon><Flag /></el-icon>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-label">目标体重</div>
-                      <div class="stat-value">{{ userStore.user?.targetWeight || '--' }} kg</div>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-              <el-col :span="6">
-                <el-card class="stat-card">
-                  <div class="stat-content">
-                    <div class="stat-icon progress">
-                      <el-icon><Aim /></el-icon>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-label">距离目标</div>
-                      <div class="stat-value">{{ weightDiff }} kg</div>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
-
-            <el-row :gutter="20" style="margin-top: 20px">
-              <el-col :span="16">
-                <el-card>
-                  <template #header>
-                    <div class="card-header">
-                      <span>体重趋势</span>
-                      <el-date-picker
-                        v-model="dateRange"
-                        type="daterange"
-                        range-separator="至"
-                        start-placeholder="开始日期"
-                        end-placeholder="结束日期"
-                        size="small"
-                        @change="fetchWeightTrend"
-                      />
-                    </div>
-                  </template>
-                  <div ref="weightChartRef" style="height: 300px"></div>
-                </el-card>
-              </el-col>
-              <el-col :span="8">
-                <el-card>
-                  <template #header>
-                    <span>今日统计</span>
-                  </template>
-                  <div class="today-stats">
-                    <div class="stat-item">
-                      <el-icon color="#67C23A"><Food /></el-icon>
-                      <span class="label">摄入卡路里</span>
-                      <span class="value">{{ todayCalories }} kcal</span>
-                    </div>
-                    <el-divider />
-                    <div class="stat-item">
-                      <el-icon color="#E6A23C"><Bicycle /></el-icon>
-                      <span class="label">消耗卡路里</span>
-                      <span class="value">{{ todayBurned }} kcal</span>
-                    </div>
-                    <el-divider />
-                    <div class="stat-item">
-                      <el-icon color="#409EFF"><TrendCharts /></el-icon>
-                      <span class="label">净摄入</span>
-                      <span class="value">{{ netCalories }} kcal</span>
-                    </div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">当前体重</div>
+              <div class="stat-value">{{ latestWeight?.weight || '--' }} kg</div>
+            </div>
           </div>
-        </el-main>
-      </el-container>
-    </el-container>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon bmi">
+              <el-icon><TrendCharts /></el-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">BMI</div>
+              <div class="stat-value">{{ latestWeight?.bmi || '--' }}</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon target">
+              <el-icon><Flag /></el-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">目标体重</div>
+              <div class="stat-value">{{ userStore.user?.targetWeight || '--' }} kg</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="stat-card">
+          <div class="stat-content">
+            <div class="stat-icon progress">
+              <el-icon><Aim /></el-icon>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">距离目标</div>
+              <div class="stat-value">{{ weightDiff }} kg</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20" style="margin-top: 20px">
+      <el-col :span="16">
+        <el-card>
+          <template #header>
+            <div class="card-header">
+              <span>体重趋势</span>
+              <el-date-picker
+                v-model="dateRange"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                @change="fetchWeightTrend"
+                style="width: 280px"
+              />
+            </div>
+          </template>
+          <div ref="weightChartRef" style="height: 300px"></div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <template #header>
+            <span>今日统计</span>
+          </template>
+          <div class="today-stats">
+            <div class="stat-item">
+              <el-icon color="#67C23A"><Food /></el-icon>
+              <span class="label">摄入卡路里</span>
+              <span class="value">{{ todayCalories }} kcal</span>
+            </div>
+            <el-divider />
+            <div class="stat-item">
+              <el-icon color="#E6A23C"><Bicycle /></el-icon>
+              <span class="label">消耗卡路里</span>
+              <span class="value">{{ todayBurned }} kcal</span>
+            </div>
+            <el-divider />
+            <div class="stat-item">
+              <el-icon color="#409EFF"><TrendCharts /></el-icon>
+              <span class="label">净摄入</span>
+              <span class="value">{{ netCalories }} kcal</span>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/store/modules/user'
 import { useWeightStore } from '@/store/modules/weight'
@@ -158,12 +116,8 @@ import { getDailyCaloriesBurned } from '@/api/exercise'
 import * as echarts from 'echarts'
 import dayjs from 'dayjs'
 
-const router = useRouter()
-const route = useRoute()
 const userStore = useUserStore()
 const weightStore = useWeightStore()
-
-const activeMenu = computed(() => route.path)
 const latestWeight = ref(null)
 const todayCalories = ref(0)
 const todayBurned = ref(0)
@@ -182,12 +136,6 @@ const weightDiff = computed(() => {
 const netCalories = computed(() => {
   return (todayCalories.value - todayBurned.value).toFixed(0)
 })
-
-const handleLogout = () => {
-  userStore.logout()
-  ElMessage.success('已退出登录')
-  router.push('/login')
-}
 
 const fetchLatestWeight = async () => {
   try {
@@ -270,42 +218,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.dashboard-container {
-  height: 100vh;
-}
-
-.el-header {
-  background-color: #409EFF;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-.header-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-content h2 {
-  margin: 0;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.el-aside {
-  background-color: #f5f7fa;
-  height: calc(100vh - 60px);
-}
-
-.el-main {
-  background-color: #f0f2f5;
+.dashboard-content {
   padding: 20px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .stat-card {
@@ -365,6 +281,7 @@ onMounted(async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .today-stats {

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { isAuthenticated } from '@/utils/auth'
+import MainLayout from '@/layouts/MainLayout.vue'
 
 const routes = [
   {
@@ -14,38 +15,41 @@ const routes = [
   },
   {
     path: '/',
+    component: MainLayout,
     redirect: '/dashboard',
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/views/Dashboard.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/weight',
-    name: 'WeightManagement',
-    component: () => import('@/views/WeightManagement.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/diet',
-    name: 'DietManagement',
-    component: () => import('@/views/DietManagement.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/exercise',
-    name: 'ExerciseManagement',
-    component: () => import('@/views/ExerciseManagement.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('@/views/Profile.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/Dashboard.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/weight',
+        name: 'WeightManagement',
+        component: () => import('@/views/WeightManagement.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/diet',
+        name: 'DietManagement',
+        component: () => import('@/views/DietManagement.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/exercise',
+        name: 'ExerciseManagement',
+        component: () => import('@/views/ExerciseManagement.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('@/views/Profile.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
   }
 ]
 

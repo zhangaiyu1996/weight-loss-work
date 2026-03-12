@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(rm -rf frontend && npm create vite@latest frontend -- --template vue)",
-      "Bash(cd frontend && npm install && npm install vue-router pinia axios element-plus echarts dayjs @element-plus/icons-vue)"
+      "Bash(cd frontend && npm install && npm install vue-router pinia axios element-plus echarts dayjs @element-plus/icons-vue)",
+      "Bash(cd frontend:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(cd backend:*)"
     ]
   }
 }

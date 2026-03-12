@@ -8,7 +8,7 @@
         </div>
       </template>
 
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom: 20px">
         <el-col :span="16">
           <el-card shadow="never">
             <template #header>
@@ -20,17 +20,17 @@
                   range-separator="至"
                   start-placeholder="开始日期"
                   end-placeholder="结束日期"
-                  size="small"
                   @change="fetchWeightTrend"
+                  style="width: 280px"
                 />
               </div>
             </template>
-            <div ref="chartRef" style="height: 400px"></div>
+            <div ref="chartRef" style="height: 350px"></div>
           </el-card>
         </el-col>
 
         <el-col :span="8">
-          <el-card shadow="never">
+          <el-card shadow="never" style="height: 100%">
             <template #header>
               <span>最新记录</span>
             </template>
@@ -60,18 +60,31 @@
         </el-col>
       </el-row>
 
-      <el-table :data="records" style="margin-top: 20px" stripe>
-        <el-table-column prop="recordDate" label="日期" width="120" />
-        <el-table-column prop="weight" label="体重 (kg)" width="120" />
-        <el-table-column prop="bmi" label="BMI" width="100" />
-        <el-table-column prop="note" label="备注" />
-        <el-table-column label="操作" width="180">
-          <template #default="{ row }">
-            <el-button size="small" @click="showEditDialog(row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(row.id)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <div class="table-container">
+        <el-table :data="records" stripe height="480">
+          <el-table-column prop="recordDate" label="日期" width="120" />
+          <el-table-column prop="weight" label="体重 (kg)" width="120" />
+          <el-table-column prop="bmi" label="BMI" width="100" />
+          <el-table-column prop="note" label="备注" />
+          <el-table-column label="操作" width="180">
+            <template #default="{ row }">
+              <el-button size="small" @click="showEditDialog(row)">编辑</el-button>
+              <el-button size="small" type="danger" @click="handleDelete(row.id)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 分页功能预留位置 -->
+        <!-- <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :total="total"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          style="margin-top: 20px; justify-content: flex-end"
+        /> -->
+      </div>
     </el-card>
 
     <el-dialog
@@ -307,12 +320,16 @@ onMounted(async () => {
 <style scoped>
 .weight-management {
   padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .latest-record {
@@ -335,5 +352,9 @@ onMounted(async () => {
   font-weight: bold;
   color: #303133;
   font-size: 16px;
+}
+
+.table-container {
+  margin-top: 20px;
 }
 </style>

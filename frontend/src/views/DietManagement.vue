@@ -18,8 +18,8 @@
                   v-model="selectedDate"
                   type="date"
                   placeholder="选择日期"
-                  size="small"
                   @change="fetchRecordsByDate"
+                  style="width: 200px"
                 />
               </div>
             </template>
@@ -64,20 +64,33 @@
         </el-col>
       </el-row>
 
-      <el-table :data="records" style="margin-top: 20px" stripe>
-        <el-table-column prop="recordDate" label="日期" width="120" />
-        <el-table-column prop="recordTime" label="时间" width="100" />
-        <el-table-column prop="mealType" label="餐次" width="100" />
-        <el-table-column prop="foodName" label="食物" />
-        <el-table-column prop="calories" label="卡路里" width="100" />
-        <el-table-column prop="portion" label="份量" width="100" />
-        <el-table-column label="操作" width="180">
-          <template #default="{ row }">
-            <el-button size="small" @click="showEditDialog(row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(row.id)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <div class="table-container">
+        <el-table :data="records" stripe height="480">
+          <el-table-column prop="recordDate" label="日期" width="120" />
+          <el-table-column prop="recordTime" label="时间" width="100" />
+          <el-table-column prop="mealType" label="餐次" width="100" />
+          <el-table-column prop="foodName" label="食物" />
+          <el-table-column prop="calories" label="卡路里" width="100" />
+          <el-table-column prop="portion" label="份量" width="100" />
+          <el-table-column label="操作" width="180">
+            <template #default="{ row }">
+              <el-button size="small" @click="showEditDialog(row)">编辑</el-button>
+              <el-button size="small" type="danger" @click="handleDelete(row.id)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <!-- 分页功能预留位置 -->
+        <!-- <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :total="total"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          style="margin-top: 20px; justify-content: flex-end"
+        /> -->
+      </div>
     </el-card>
 
     <el-dialog
@@ -389,12 +402,15 @@ onMounted(async () => {
 <style scoped>
 .diet-management {
   padding: 20px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .today-stats {
@@ -417,5 +433,9 @@ onMounted(async () => {
   font-weight: bold;
   color: #303133;
   font-size: 16px;
+}
+
+.table-container {
+  margin-top: 20px;
 }
 </style>
