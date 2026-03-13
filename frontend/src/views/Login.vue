@@ -138,7 +138,7 @@ const goToRegister = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   overflow: auto;
   min-height: 100vh;
 }
@@ -155,7 +155,7 @@ const goToRegister = () => {
 .circle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(99, 102, 241, 0.08);
   animation: float 20s infinite ease-in-out;
 }
 
@@ -203,7 +203,7 @@ const goToRegister = () => {
 .login-header {
   text-align: center;
   margin-bottom: 40px;
-  color: white;
+  color: #2c3e50;
 }
 
 .logo-wrapper {
@@ -212,15 +212,15 @@ const goToRegister = () => {
   justify-content: center;
   width: 80px;
   height: 80px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(99, 102, 241, 0.1);
   border-radius: 20px;
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .logo-icon {
-  color: white;
+  color: #6366f1;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
@@ -274,14 +274,14 @@ const goToRegister = () => {
   font-size: 16px;
   font-weight: 600;
   border-radius: 8px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   border: none;
   transition: all 0.3s;
 }
 
 .login-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
 }
 
 .login-button:active {
@@ -304,7 +304,7 @@ const goToRegister = () => {
 .beian-info {
   text-align: center;
   margin-top: 30px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #64748b;
   font-size: 13px;
 }
 
@@ -313,7 +313,7 @@ const goToRegister = () => {
 }
 
 .beian-text a {
-  color: rgba(255, 255, 255, 0.9);
+  color: #64748b;
   text-decoration: none;
   transition: all 0.3s;
   padding: 4px 8px;
@@ -321,8 +321,8 @@ const goToRegister = () => {
 }
 
 .beian-text a:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: #475569;
+  background: rgba(99, 102, 241, 0.1);
 }
 
 .copyright {
