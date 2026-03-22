@@ -5,7 +5,13 @@
       "Bash(cd frontend && npm install && npm install vue-router pinia axios element-plus echarts dayjs @element-plus/icons-vue)",
       "Bash(cd frontend:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(cd backend:*)"
+      "Bash(cd backend:*)",
+      "Bash(claude mcp:*)",
+      "Read(//Users/zhangaiyu/.claude/**)",
+      "mcp__stitch__list_projects",
+      "mcp__stitch__list_screens",
+      "mcp__stitch__get_project",
+      "mcp__stitch__get_screen"
     ]
   }
 }
